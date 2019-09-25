@@ -4,48 +4,65 @@ using namespace std;
 
 #define type_n template <typename T>
 
-type_n
 class Node
 {
-  T data = NULL;
-  Node *prev;
-  Node *next;
+  public:
+    int data;
+    Node *prev;
+    Node *next;
+
+    Node(int, Node*, Node*);
 };
 
+Node::Node(int elem, Node* prev = NULL, Node* next = NULL)
+{
+  this->data = elem;
+  this->prev = prev;
+  this->next = next;
+}
 
-
-type_n
 class DoublyLinkedList
 {
-  Node<T> *head;
-  Node<T> *tail;
-  int size;
+  public:
+    Node *head = NULL;
+    Node *tail = NULL;
+    int size = 0;
 
-  DoublyLinkedList();
-  DoublyLinkedList(T data);
+    void add_last(int elem);
+    int length();
+    bool empty();
 };
 
-type_n
-DoublyLinkedList<T>::DoublyLinkedList()
+void DoublyLinkedList::add_last(int elem)
 {
-  this->head = this->tail = NULL;
-  this->size = 0;
+  Node* temp_node = new Node(elem);
+  if (empty())
+    head = tail = temp_node;
+  else
+  {
+    tail->next = temp_node;
+    tail = tail->next;
+  }
+
+  size++;
+  free(temp_node);
 };
 
-type_n
-DoublyLinkedList<T>::DoublyLinkedList(T data)
+int DoublyLinkedList::length()
 {
-  Node<T> temp_node = new Node();
-  temp_node.data = data;
-  temp_node.next = NULL;
-  temp_node.prev = NULL;
-  this->head = temp_node;
-  this->tail = temp_node;
-  size = 1;
+  return size;
 };
 
+bool DoublyLinkedList::empty()
+{
+  return length() == 0;
+};
 
 int main()
 {
+  DoublyLinkedList dll = DoublyLinkedList();
+  dll.add_last(5);
+  dll.add_last(6);
+  cout << "Length -> " << dll.length();
   return 0;
 }
