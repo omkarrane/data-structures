@@ -20,6 +20,11 @@ public:
   T get_left_child(int);
   T get_right_child(int);
   int get_parent_index(int);
+  void heapify_up(int);
+  void heapify_down(int);
+  void poll();
+  void sink(int);
+  void insert(T);
 };
 
 type_n
@@ -54,9 +59,7 @@ type_n bool Heap<T>::has_right_child(int index)
   return ((index * 2) + 2) <= size;
 };
 
-type_n
-    T
-    Heap<T>::get_element_at(int index)
+type_n T Heap<T>::get_element_at(int index)
 {
   if (index > size || index < 0)
     throw "Invalid Index Exception";
@@ -64,16 +67,12 @@ type_n
   return arr[index];
 };
 
-type_n
-    T
-    Heap<T>::get_left_child(int index)
+type_n T Heap<T>::get_left_child(int index)
 {
   return arr[get_left_child_index(index)];
 };
 
-type_n
-    T
-    Heap<T>::get_right_child(int index)
+type_n T Heap<T>::get_right_child(int index)
 {
   return arr[get_right_child_index(index)];
 };
@@ -83,7 +82,20 @@ type_n int Heap<T>::get_parent_index(int index)
   if (index < 0 || index >= size)
     throw "Invalid Index Exception";
 
-  return 0; // TODO: Implement logic for finding parent index
+  if(index & 1)
+    return (index / 2);
+  else
+    return (index / 2) - 1;
+};
+
+type_n void Heap<T>::heapify_down(int index)
+{
+
+};
+
+type_n void Heap<T>::heapify_up(int index)
+{
+
 };
 
 int main()
