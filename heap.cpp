@@ -199,8 +199,7 @@ int main()
   cout << h.poll() << endl;
   cout << h.poll() << endl;
   cout << h.poll() << endl;
-  cout << h.poll() << endl;
-  cout << h.poll() << endl;
+  cout << h.remove_at(0) << endl;
 
 
   return 0;
