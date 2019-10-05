@@ -30,6 +30,7 @@ public:
   void heapify_down();
   T peek();
   T poll();
+  T remove_at(int);
   void insert(T);
   void swap_elements(int, int);
 };
@@ -132,6 +133,21 @@ type_n void Heap<T>::insert(T element)
   heapify_up();
 };
 
+type_n T Heap<T>::remove_at(int index)
+{
+  T elem_removed = get_element_at(index);
+  swap_elements(index, arr.size() - 1);
+  size--;
+
+  T elem = get_element_at(index);
+  heapify_down();
+
+  if(elem == get_element_at(index))
+    heapify_up();
+
+  return elem_removed;
+};
+
 type_n void Heap<T>::heapify_up()
 {
   int index = size - 1;
@@ -183,6 +199,9 @@ int main()
   cout << h.poll() << endl;
   cout << h.poll() << endl;
   cout << h.poll() << endl;
+  cout << h.poll() << endl;
+  cout << h.poll() << endl;
+
 
   return 0;
 }
